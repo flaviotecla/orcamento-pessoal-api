@@ -1,0 +1,21 @@
+@orcamento_pessoal_api_HostAddress = http://localhost:5097
+
+### Get Weather Forecast
+GET {{orcamento_pessoal_api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+### Authenticate User
+POST {{orcamento_pessoal_api_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "userName": "sandro",
+  "password": "123456"
+}
+
+### Logout User
+POST {{orcamento_pessoal_api_HostAddress}}/api/auth/logout
+Accept: application/json
+
+### Get Transactions
+GET {{orcamento_pessoal_api_HostAddress}}/api/transaction/getAll
