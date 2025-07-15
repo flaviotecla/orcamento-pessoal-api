@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using orcamento_pessoal_api.Helpers;
 
 namespace orcamento_pessoal_api.Controllers
 {
@@ -32,6 +33,31 @@ namespace orcamento_pessoal_api.Controllers
             };
 
             return Ok(transactions);
+        }
+
+        [HttpGet("salt")]
+        [AllowAnonymous]
+        public IActionResult SaltTest()
+        {
+            var salt = SenhaHelper.GenerateSalt();
+            return Ok(salt);
+        }
+
+        [HttpGet("hash")]
+        [AllowAnonymous]
+        public IActionResult HashTest()
+        {
+            // var salt = SenhaHelper.GenerateSalt();
+            var salt = "o7TZ/BULGn2FTRuJbAWXjw==";
+            var hash = SenhaHelper.GenerateHash("1q2w3e4r", salt);
+
+            var result = new
+            {
+                Salt = salt,
+                Hash = hash
+            };
+
+            return Ok(result);
         }
     }
 }

@@ -1,4 +1,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+using orcamento_pessoal_api.Data;
+using orcamento_pessoal_api.Repositories;
+using orcamento_pessoal_api.Repositories.Interfaces;
+using orcamento_pessoal_api.Services;
+using orcamento_pessoal_api.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,9 +13,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 // swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 // configurar autenticação por cookie
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

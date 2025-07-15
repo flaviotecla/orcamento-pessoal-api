@@ -19,3 +19,19 @@ Accept: application/json
 
 ### Get Transactions
 GET {{orcamento_pessoal_api_HostAddress}}/api/transaction/getAll
+
+### Get salt
+GET {{orcamento_pessoal_api_HostAddress}}/api/transaction/salt
+
+### Get hash
+GET {{orcamento_pessoal_api_HostAddress}}/api/transaction/hash
+
+### Create User
+POST {{orcamento_pessoal_api_HostAddress}}/api/Users/create
+Accept: application/json
+
+{
+  "name": "Pedro Celestino",
+  "login": "pedrao",
+  "password": "123456"
+}
